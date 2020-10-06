@@ -23,7 +23,7 @@ class RemoveFromBasketControllerTest extends WebTestCase
     protected BasketManager $basketManager;
     protected BasketStorageInterface $basketStorage;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setUpClient();
 
