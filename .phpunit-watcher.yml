@@ -1,0 +1,15 @@
+watch:
+  directories:
+    - src
+    - tests
+    - domain
+    - config
+    - templates
+  fileMask: ['*.php', '*.yaml']
+notifications:
+  passingTests: false
+  failingTests: false
+phpunit:
+  binaryPath: vendor/bin/simple-phpunit
+  arguments: '--stop-on-failure'
+  timeout: 180

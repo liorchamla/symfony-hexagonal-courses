@@ -1,0 +1,7 @@
+<h1>{{ view.course.title }}</h1>
+
+<ul>
+	{% for c in view.chapters %}
+		<li>{{ c.title }}</li>
+	{% endfor %}
+</ul>

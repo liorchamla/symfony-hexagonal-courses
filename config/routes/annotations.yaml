@@ -1,0 +1,11 @@
+courses:
+  resource: ../../src/Courses/Controller/
+  type: annotation
+
+basket:
+  resource: ../../src/Basket/Controller/
+  type: annotation
+
+kernel:
+  resource: ../../src/Kernel.php
+  type: annotation
