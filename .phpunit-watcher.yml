@@ -10,6 +10,6 @@ notifications:
   passingTests: false
   failingTests: false
 phpunit:
-  binaryPath: vendor/bin/simple-phpunit
+  binaryPath: vendor/bin/pest
   arguments: '--stop-on-failure'
   timeout: 180

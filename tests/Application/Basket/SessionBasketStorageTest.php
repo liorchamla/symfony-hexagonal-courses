@@ -18,7 +18,7 @@ class SessionBasketStorageTest extends WebTestCase
 
     protected CourseRepositoryInterface $courseRepository;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setUpClient();
 

@@ -19,7 +19,7 @@ class ShowChapterControllerTest extends WebTestCase
     protected CourseRepositoryInterface $courseRepository;
     protected ChapterRepositoryInterface $chapterRepository;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setUpClient();
 

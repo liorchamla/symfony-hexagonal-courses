@@ -13,7 +13,7 @@ class DoctrineDiscountRepositoryTest extends WebTestCase
 {
     use WithClientTrait;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setUpClient();
     }

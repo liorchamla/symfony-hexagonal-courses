@@ -13,7 +13,7 @@ class SessionDiscountStorageTest extends WebTestCase
 
     protected SessionDiscountStorage $storage;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setUpClient();
 
