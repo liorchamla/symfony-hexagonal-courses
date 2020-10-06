@@ -8,4 +8,5 @@ interface CourseRepositoryInterface
 {
     public function findOneOrNull(string $uuid): ?Course;
     public function store(Course $course);
+    public function delete(Course $course);
 }
