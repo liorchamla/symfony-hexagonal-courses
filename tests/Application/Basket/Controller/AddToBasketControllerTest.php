@@ -22,7 +22,7 @@ class AddToBasketControllerTest extends WebTestCase
     protected BasketStorageInterface $basketStorage;
     protected DiscountStorageInterface $discountStorage;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setUpClient();
 

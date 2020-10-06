@@ -27,7 +27,7 @@ class RemoveSalableFromBasketTest extends TestCase
     protected BasketManager $basketManager;
     protected CourseRepositoryInterface $courseRepository;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->basketStorage = new InMemoryBasketStorage;
         $this->basketManager = new BasketManager($this->basketStorage, new DiscountComputation, new InMemoryDiscountStorage);

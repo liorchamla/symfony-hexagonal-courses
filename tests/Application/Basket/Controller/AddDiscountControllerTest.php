@@ -29,7 +29,7 @@ class AddDiscountControllerTest extends WebTestCase
     protected DiscountRepositoryInterface $discountRepository;
     protected DiscountStorageInterface $discountStorage;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->setUpClient();
 
