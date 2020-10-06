@@ -76,7 +76,15 @@
       "@auto-scripts"
     ],
     "test-domain": "simple-phpunit tests/Domain",
-    "test-application": "simple-phpunit tests/Application"
+    "test-application": [
+      "@prepare-system",
+      "simple-phpunit tests/Application"
+    ],
+    "prepare-system": [
+      "php bin/console d:d:d --env=test --force",
+      "php bin/console d:d:c --env=test",
+      "php bin/console d:m:m --no-interaction --env=test"
+    ]
   },
   "conflict": {
     "symfony/symfony": "*"
