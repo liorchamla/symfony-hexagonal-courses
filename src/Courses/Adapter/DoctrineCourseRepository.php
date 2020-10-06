@@ -44,4 +44,9 @@ class DoctrineCourseRepository implements ServiceEntityRepositoryInterface, Cour
         $this->em->persist($courseEntity);
         $this->em->flush();
     }
+
+    public function delete(Course $course)
+    {
+        ///
+    }
 }
