@@ -75,7 +75,8 @@
     "post-update-cmd": [
       "@auto-scripts"
     ],
-    "test-domain": "simple-phpunit tests/Domain"
+    "test-domain": "simple-phpunit tests/Domain",
+    "test-application": "simple-phpunit tests/Application"
   },
   "conflict": {
     "symfony/symfony": "*"
