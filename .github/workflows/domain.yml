@@ -35,3 +35,6 @@ jobs:
 
     - name: Run domain tests
       run: composer run-script test-domain
+      
+    - name: Run application tests
+      run: composer run-script test-application
