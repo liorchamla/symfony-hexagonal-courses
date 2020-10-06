@@ -76,10 +76,10 @@
     "post-update-cmd": [
       "@auto-scripts"
     ],
-    "test-domain": "simple-phpunit tests/Domain",
+    "test-domain": "pest tests/Domain",
     "test-application": [
       "@prepare-system",
-      "simple-phpunit tests/Application"
+      "pest tests/Application"
     ],
     "prepare-system": [
       "php bin/console d:d:d --env=test --force",

@@ -68,4 +68,9 @@ class DoctrineChapterRepository implements ServiceEntityRepositoryInterface, Cha
             ->getQuery()
             ->getResult();
     }
+
+    public function delete(Chapter $chapter)
+    {
+        //
+    }
 }
