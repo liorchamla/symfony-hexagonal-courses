@@ -19,4 +19,9 @@ class InMemoryCourseRepository implements CourseRepositoryInterface
     {
         return $this->courses[$uuid] ?? null;
     }
+
+    public function delete(Course $course)
+    {
+        unset($this->courses[$course->uuid]);
+    }
 }
