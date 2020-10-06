@@ -3,16 +3,10 @@
 namespace App\Tests\Domain\Courses\UseCase;
 
 use App\Tests\Domain\Courses\Adapters\InMemoryChapterRepository;
-use App\Tests\Domain\Courses\Adapters\InMemoryCourseRepository;
 use App\Tests\Domain\Courses\Factory\ChapterFactory;
-use App\Tests\Domain\Courses\Factory\CourseFactory;
 use Domain\Courses\Exception\ChapterNotFoundException;
-use Domain\Courses\Exception\CourseNotFoundException;
 use Domain\Courses\UseCase\DeleteChapter;
-use Domain\Courses\UseCase\DeleteCourse;
 use Domain\Courses\UseCase\RequestModel\DeleteChapterRequest;
-use Domain\Courses\UseCase\RequestModel\DeleteCourseRequest;
-use PHPUnit\Framework\TestCase;
 
 use function PHPUnit\Framework\assertNull;
 
