@@ -25,4 +25,9 @@ class InMemoryChapterRepository implements ChapterRepositoryInterface
     {
         return array_filter($this->chapters, fn (Chapter $c) => $c->course->uuid === $courseUuid);
     }
+
+    public function delete(Chapter $chapter)
+    {
+        unset($this->chapters[$chapter->uuid]);
+    }
 }
