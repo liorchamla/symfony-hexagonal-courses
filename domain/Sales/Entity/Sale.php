@@ -26,6 +26,6 @@ class Sale
 
     public static function createFromBasket(BasketManager $basketManager): self
     {
-        return  new self($basketManager->getOwner(), $basketManager->getItems());
+        return new self($basketManager->getOwner(), $basketManager->getItems());
     }
 }

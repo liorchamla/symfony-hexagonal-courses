@@ -28,7 +28,7 @@ class AddDiscountController extends AbstractController
      */
     public function __invoke(string $uuid): Response
     {
-        $view = $this->useCase->execute(new AddDiscountRequest([
+        $this->useCase->execute(new AddDiscountRequest([
             'uuid' => $uuid
         ]));
 

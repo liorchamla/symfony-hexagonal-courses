@@ -10,7 +10,7 @@ class InMemoryCourseRepository implements CourseRepositoryInterface
     /** @var Course[] */
     public array $courses = [];
 
-    public function store(Course $course)
+    public function store(Course $course): void
     {
         $this->courses[$course->uuid] = $course;
     }
@@ -20,7 +20,7 @@ class InMemoryCourseRepository implements CourseRepositoryInterface
         return $this->courses[$uuid] ?? null;
     }
 
-    public function delete(Course $course)
+    public function delete(Course $course): void
     {
         unset($this->courses[$course->uuid]);
     }

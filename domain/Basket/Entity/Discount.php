@@ -19,7 +19,11 @@ class Discount
     public int $value;
     public int $maximumUses;
 
-    /** @var Salable[] */
+    /**
+     * 
+     *
+     * @var Salable[] 
+     */
     public array $items = [];
 
     public function __construct(string $scope = self::SCOPE_GLOBAL, string $type = self::TYPE_FIXED, int $value, int $maximumUses, array $items = [], ?string $uuid = '')
@@ -31,10 +35,12 @@ class Discount
         $this->items = $items;
 
         if ($this->scope === self::SCOPE_SPECIFIC && 0 === count($this->items)) {
-            throw new IncoherentDiscountConfigurationException(sprintf(
-                'Discount with scope "%s" could not be created. You passed 0 items',
-                self::SCOPE_SPECIFIC
-            ));
+            throw new IncoherentDiscountConfigurationException(
+                sprintf(
+                    'Discount with scope "%s" could not be created. You passed 0 items',
+                    self::SCOPE_SPECIFIC
+                )
+            );
         }
         $this->uuid = $uuid;
 

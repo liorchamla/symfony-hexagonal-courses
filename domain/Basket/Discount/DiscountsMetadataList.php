@@ -18,14 +18,16 @@ class DiscountsMetadataList
     {
         $uuid = $salable->getUuid();
 
-        if (empty($this->discountsMetadata[$uuid])) {
+        if (!array_key_exists($uuid, $this->discountsMetadata)) {
             $this->discountsMetadata[$uuid] = [];
         }
 
-        $this->discountsMetadata[$uuid][] = new AppliedDiscountMetadata([
+        $this->discountsMetadata[$uuid][] = new AppliedDiscountMetadata(
+            [
             'salable' => $salable,
             'discount' => $discount
-        ]);
+            ]
+        );
     }
 
     public function getDiscountsMetadataForSalable(Salable $salable): array

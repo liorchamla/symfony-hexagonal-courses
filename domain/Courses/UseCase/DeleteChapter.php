@@ -26,10 +26,12 @@ class DeleteChapter
         $chapter = $this->chapterRepository->findOneOrNull($request->uuid);
 
         if (null === $chapter) {
-            throw new ChapterNotFoundException(sprintf(
-                'Chapter with UUID %s was not found and can not be deleted !',
-                $request->uuid
-            ));
+            throw new ChapterNotFoundException(
+                sprintf(
+                    'Chapter with UUID %s was not found and can not be deleted !',
+                    $request->uuid
+                )
+            );
         }
 
         $this->chapterRepository->delete($chapter);

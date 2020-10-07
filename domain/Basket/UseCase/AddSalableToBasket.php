@@ -25,10 +25,12 @@ class AddSalableToBasket
         $course = $this->courseRepository->findOneOrNull($request->salable_uuid);
 
         if (null === $course) {
-            throw new SalableCouldNotBeAddedToBasketException(sprintf(
-                'Salable with UUID %s was not found !',
-                $request->salable_uuid
-            ));
+            throw new SalableCouldNotBeAddedToBasketException(
+                sprintf(
+                    'Salable with UUID %s was not found !',
+                    $request->salable_uuid
+                )
+            );
         }
 
         $this->basketManager->addItem($course);

@@ -12,7 +12,7 @@ class DiscountComputation
     /**
      * Undocumented function
      *
-     * @param Salable[] $salables
+     * @param Salable[]  $salables
      * @param Discount[] $specificDiscounts
      *
      * @return DiscountsMetadataList
@@ -22,15 +22,12 @@ class DiscountComputation
         $metadatas = new DiscountsMetadataList;
 
         foreach ($salables as $salable) {
-            $specificDiscounts = $this->findSpecificDiscounts($salable, $discounts);
+            $allDiscountsInOrderOfSpecificity = array_merge(
+                $this->findSpecificDiscounts($salable, $discounts),
+                $this->findGlobalDiscounts($discounts)
+            );
 
-            foreach ($specificDiscounts as $d) {
-                $metadatas->addDiscountMetadata($salable, $d);
-            }
-
-            $globalDiscounts = $this->findGlobalDiscounts($discounts);
-
-            foreach ($globalDiscounts as $d) {
+            foreach ($allDiscountsInOrderOfSpecificity as $d) {
                 $metadatas->addDiscountMetadata($salable, $d);
             }
         }
@@ -53,7 +50,7 @@ class DiscountComputation
     /**
      * Undocumented function
      *
-     * @param Salable $salable
+     * @param Salable    $salable
      * @param Discount[] $specificDiscounts
      *
      * @return Discount[]
@@ -66,7 +63,7 @@ class DiscountComputation
     /**
      * Undocumented function
      *
-     * @param Salable[] $salables
+     * @param Salable[]  $salables
      * @param Discount[] $discounts
      *
      * @return DiscountsMetadataList
@@ -79,7 +76,7 @@ class DiscountComputation
     /**
      * Undocumented function
      *
-     * @param Salable[] $salables
+     * @param Salable[]  $salables
      * @param Discount[] $discounts
      *
      * @return integer
@@ -122,7 +119,10 @@ class DiscountComputation
 
     protected function getOverallPercentDiscountsAmount(int $initialPrice, array $discountsMetadata): int
     {
-        $percentDiscountsMetadata = array_filter($discountsMetadata, fn (AppliedDiscountMetadata $metadata) => $metadata->discount && $metadata->discount->type === Discount::TYPE_PERCENT);;
+        $percentDiscountsMetadata = array_filter(
+            $discountsMetadata,
+            fn (AppliedDiscountMetadata $metadata) => $metadata->discount && $metadata->discount->type === Discount::TYPE_PERCENT
+        );
 
         foreach ($percentDiscountsMetadata as $metadata) {
             $initialPrice -= $metadata->getDiscountedAmount($initialPrice);

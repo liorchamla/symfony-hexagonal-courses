@@ -32,10 +32,8 @@ class AddToBasketController extends AbstractController
      */
     public function __invoke(string $uuid)
     {
-        $course = $this->courseRepository->findOneOrNull($uuid);
-
         try {
-            $view = $this->useCase->execute(new AddSalableToBasketRequest([
+            $this->useCase->execute(new AddSalableToBasketRequest([
                 'salable_class' => Course::class,
                 'salable_uuid' => $uuid
             ]));

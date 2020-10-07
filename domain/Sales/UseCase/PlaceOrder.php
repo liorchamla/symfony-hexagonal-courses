@@ -26,15 +26,19 @@ class PlaceOrder
     public function execute(PlaceOrderRequest $request): PlaceOrderViewModel
     {
         if (false === $request->isAuthenticated) {
-            throw new OrderCouldNotBePlacedWithNoAuthenticatedUserException(sprintf(
-                'Order could not be placed because the current user is not authenticated'
-            ));
+            throw new OrderCouldNotBePlacedWithNoAuthenticatedUserException(
+                sprintf(
+                    'Order could not be placed because the current user is not authenticated'
+                )
+            );
         }
 
         if (0 === count($this->basketManager->getItems())) {
-            throw new OrderCouldNotBePlacedWithEmptyBasketException(sprintf(
-                'Order could not be placed because the basket is empty'
-            ));
+            throw new OrderCouldNotBePlacedWithEmptyBasketException(
+                sprintf(
+                    'Order could not be placed because the basket is empty'
+                )
+            );
         }
 
         $sale = Sale::createFromBasket($this->basketManager);

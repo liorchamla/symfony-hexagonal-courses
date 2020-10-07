@@ -22,10 +22,12 @@ class DeleteCourse
         $course = $this->courseRepository->findOneOrNull($request->uuid);
 
         if (null === $course) {
-            throw new CourseNotFoundException(sprintf(
-                'Course with UUID %s was not found and can not be deleted !',
-                $request->uuid
-            ));
+            throw new CourseNotFoundException(
+                sprintf(
+                    'Course with UUID %s was not found and can not be deleted !',
+                    $request->uuid
+                )
+            );
         }
 
         $this->courseRepository->delete($course);

@@ -9,7 +9,11 @@ class User
 {
     public string $uuid;
 
-    /** @var Course[] */
+    /**
+     * 
+     *
+     * @var Course[] 
+     */
     public array $courses = [];
 
     public function __construct(array $courses = [])

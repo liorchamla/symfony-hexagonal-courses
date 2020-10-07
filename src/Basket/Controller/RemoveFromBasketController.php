@@ -35,7 +35,7 @@ class RemoveFromBasketController extends AbstractController
     public function __invoke(string $uuid)
     {
         try {
-            $view = $this->useCase->execute(new RemoveSalableFromBasketRequest([
+            $this->useCase->execute(new RemoveSalableFromBasketRequest([
                 'salable_uuid' => $uuid
             ]));
 

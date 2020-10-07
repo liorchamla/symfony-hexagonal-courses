@@ -16,17 +16,17 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 
 class DoctrineChapterRepository implements ServiceEntityRepositoryInterface, ChapterRepositoryInterface
 {
-    private EntityManagerInterface $em;
+    private EntityManagerInterface $manager;
 
     public function __construct(ManagerRegistry $registry)
     {
-        $this->em = $registry->getManagerForClass(ChapterEntity::class);
+        $this->manager = $registry->getManagerForClass(ChapterEntity::class);
     }
 
     public function findOneOrNull(string $uuid): ?Chapter
     {
         /** @var ChapterEntity */
-        $chapter = $this->em->createQueryBuilder()
+        $chapter = $this->manager->createQueryBuilder()
             ->select('c')
             ->from(ChapterEntity::class, 'c')
             ->andWhere('c.uuid = :uuid')
@@ -41,25 +41,25 @@ class DoctrineChapterRepository implements ServiceEntityRepositoryInterface, Cha
         return ChapterEntity::toDomain($chapter);
     }
 
-    public function store(Chapter $chapter)
+    public function store(Chapter $chapter): void
     {
         $chapterEntity = ChapterEntity::fromDomain($chapter);
-        $courseEntity = $this->em->find(CourseEntity::class, $chapterEntity->course->uuid);
+        $courseEntity = $this->manager->find(CourseEntity::class, $chapterEntity->course->uuid);
 
         if ($courseEntity) {
             $chapterEntity->course = $courseEntity;
         }
 
-        $this->em->persist($chapterEntity);
+        $this->manager->persist($chapterEntity);
 
 
-        $this->em->flush();
+        $this->manager->flush();
     }
 
 
     public function findChaptersForCourse(string $courseUuid): array
     {
-        return $this->em->createQueryBuilder()
+        return $this->manager->createQueryBuilder()
             ->select('c')
             ->from(ChapterEntity::class, 'c')
             ->innerJoin(CourseEntity::class, 'cc', Expr\Join::WITH, 'c.courseUuid = cc.uuid')
@@ -69,7 +69,7 @@ class DoctrineChapterRepository implements ServiceEntityRepositoryInterface, Cha
             ->getResult();
     }
 
-    public function delete(Chapter $chapter)
+    public function delete(Chapter $chapter): void
     {
         //
     }

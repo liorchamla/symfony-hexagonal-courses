@@ -26,6 +26,7 @@
   "require-dev": {
     "dama/doctrine-test-bundle": "^6.3",
     "fzaninotto/faker": "^1.9",
+    "nunomaduro/phpinsights": "^1.14",
     "pestphp/pest": "^0.3.8",
     "spatie/phpunit-watcher": "^1.22",
     "symfony/browser-kit": "^5.1",
@@ -68,7 +69,8 @@
   "scripts": {
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
-      "assets:install %PUBLIC_DIR%": "symfony-cmd"
+      "assets:install %PUBLIC_DIR%": "symfony-cmd",
+      "security-checker security:check": "script"
     },
     "post-install-cmd": [
       "@auto-scripts"

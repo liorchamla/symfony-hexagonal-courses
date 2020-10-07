@@ -14,17 +14,17 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 
 class DoctrineCourseRepository implements ServiceEntityRepositoryInterface, CourseRepositoryInterface
 {
-    private EntityManagerInterface $em;
+    private EntityManagerInterface $manager;
 
     public function __construct(ManagerRegistry $registry)
     {
-        $this->em = $registry->getManagerForClass(CourseEntity::class);
+        $this->manager = $registry->getManagerForClass(CourseEntity::class);
     }
 
     public function findOneOrNull(string $uuid): ?Course
     {
         /** @var CourseEntity */
-        $course = $this->em->createQueryBuilder()
+        $course = $this->manager->createQueryBuilder()
             ->select('c')
             ->from(CourseEntity::class, 'c')
             ->andWhere('c.uuid = :uuid')
@@ -38,14 +38,14 @@ class DoctrineCourseRepository implements ServiceEntityRepositoryInterface, Cour
 
         return CourseEntity::toDomain($course);
     }
-    public function store(Course $course)
+    public function store(Course $course): void
     {
         $courseEntity = CourseEntity::fromDomain($course);
-        $this->em->persist($courseEntity);
-        $this->em->flush();
+        $this->manager->persist($courseEntity);
+        $this->manager->flush();
     }
 
-    public function delete(Course $course)
+    public function delete(Course $course): void
     {
         ///
     }

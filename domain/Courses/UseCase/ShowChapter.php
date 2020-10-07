@@ -25,10 +25,12 @@ class ShowChapter
         $chapter = $this->chapterRepository->findOneOrNull($request->uuid);
 
         if (null === $chapter) {
-            throw new ChapterNotFoundException(sprintf(
-                'Chapter with UUID %s was not found',
-                $request->uuid
-            ));
+            throw new ChapterNotFoundException(
+                sprintf(
+                    'Chapter with UUID %s was not found',
+                    $request->uuid
+                )
+            );
         }
 
         $canPlay = $request->userUuid ? $this->userRepository->hasUserBoughtThisCourse($request->userUuid, $chapter->course->uuid) : false;

@@ -85,6 +85,7 @@ class AddDiscountTest extends TestCase
         );
     }
 
+
     public function provide_courses_and_discounts()
     {
         yield [

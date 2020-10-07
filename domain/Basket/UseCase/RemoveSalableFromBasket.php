@@ -26,7 +26,7 @@ class RemoveSalableFromBasket
      *
      * @return RemoveSalableFromBasketViewModel
      *
-     * @throws  SalableNotFoundInBasketException
+     * @throws SalableNotFoundInBasketException
      */
     public function execute(RemoveSalableFromBasketRequest $request): RemoveSalableFromBasketViewModel
     {
@@ -35,10 +35,12 @@ class RemoveSalableFromBasket
         $salable = $this->basketManager->getItem($removedUuid);
 
         if (null === $salable) {
-            throw new SalableNotFoundInBasketException(sprintf(
-                'Salable with UUID %s was not found in the basket and cant be removed !',
-                $removedUuid
-            ));
+            throw new SalableNotFoundInBasketException(
+                sprintf(
+                    'Salable with UUID %s was not found in the basket and cant be removed !',
+                    $removedUuid
+                )
+            );
         }
 
         $this->basketManager->removeItem($salable);

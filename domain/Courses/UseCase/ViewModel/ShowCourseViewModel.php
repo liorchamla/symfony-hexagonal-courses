@@ -9,7 +9,11 @@ class ShowCourseViewModel
 {
     public Course $course;
 
-    /** @var Chapter[] */
+    /**
+     * 
+     *
+     * @var array<int, Chapter> 
+     */
     public array $chapters = [];
 
     public function __construct(Course $course, array $chapters = [])

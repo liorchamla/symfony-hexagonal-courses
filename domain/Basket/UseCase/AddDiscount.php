@@ -27,10 +27,12 @@ class AddDiscount
         $discount = $this->discountRepository->findOneOrNull($request->uuid);
 
         if (null === $discount) {
-            throw new DiscountNotFoundException(sprintf(
-                'No discount with UUID %s was found !',
-                $request->uuid
-            ));
+            throw new DiscountNotFoundException(
+                sprintf(
+                    'No discount with UUID %s was found !',
+                    $request->uuid
+                )
+            );
         }
 
         $this->basketManager->applyDiscount($discount);

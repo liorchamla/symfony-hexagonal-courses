@@ -33,7 +33,7 @@ class ShowCourseController extends AbstractController
             return $this->render('Courses/show-course.twig', [
                 'view' => $view
             ]);
-        } catch (CourseNotFoundException $e) {
+        } catch (CourseNotFoundException $exception) {
             throw $this->createNotFoundException();
         }
     }

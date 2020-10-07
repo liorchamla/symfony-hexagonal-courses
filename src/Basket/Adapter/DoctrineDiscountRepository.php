@@ -47,7 +47,8 @@ class DoctrineDiscountRepository implements ServiceEntityRepositoryInterface, Di
         $discountEntity = DiscountEntity::fromDomain($discount);
 
         $discountEntity->items = $discountEntity->items->map(function (CourseEntity $c) {
-            if ($courseEntity = $this->em->find(CourseEntity::class, $c->uuid)) {
+            $courseEntity = $this->em->find(CourseEntity::class, $c->uuid);
+            if (null !== $courseEntity) {
                 return $courseEntity;
             }
         });
