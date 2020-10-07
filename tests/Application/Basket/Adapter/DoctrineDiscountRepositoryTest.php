@@ -18,15 +18,25 @@ class DoctrineDiscountRepositoryTest extends WebTestCase
         $this->setUpClient();
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function it_can_store_and_retrieve_a_discount()
     {
-        /** @var DiscountRepositoryInterface */
+        /**
+* 
+         *
+ * @var DiscountRepositoryInterface 
+*/
         $discountRepository = self::$container->get(DoctrineDiscountRepository::class);
 
-        $discount = DiscountFactory::create([
+        $discount = DiscountFactory::create(
+            [
             'scope' => Discount::SCOPE_GLOBAL
-        ]);
+            ]
+        );
 
         $discountRepository->store($discount);
 
@@ -37,18 +47,28 @@ class DoctrineDiscountRepositoryTest extends WebTestCase
         $this->assertEquals($discount->uuid, $storedDiscount->uuid);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function it_can_store_and_retrieve_a_specific_discount_with_courses()
     {
-        /** @var DoctrineDiscountRepository */
+        /**
+* 
+         *
+ * @var DoctrineDiscountRepository 
+*/
         $discountRepository = self::$container->get(DoctrineDiscountRepository::class);
 
         $courses = $this->createCourses(3, ['price' => 300]);
 
-        $discount = DiscountFactory::create([
+        $discount = DiscountFactory::create(
+            [
             'scope' => Discount::SCOPE_SPECIFIC,
             'items' => $courses
-        ]);
+            ]
+        );
 
         $discountRepository->store($discount);
 

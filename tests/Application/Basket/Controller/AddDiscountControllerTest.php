@@ -43,7 +43,11 @@ class AddDiscountControllerTest extends WebTestCase
 
     public function func()
     {
-        /** @var DiscountRepositoryInterface */
+        /**
+* 
+         *
+ * @var DiscountRepositoryInterface 
+*/
         $repository = self::$container->get(DiscountRepositoryInterface::class);
 
         $domainDiscount = DiscountFactory::create(['scope' => Discount::SCOPE_GLOBAL, 'maximum_uses' => 10]);
@@ -67,18 +71,22 @@ class AddDiscountControllerTest extends WebTestCase
         }
 
         // And a Discount exists 
-        $discount = DiscountFactory::create([
+        $discount = DiscountFactory::create(
+            [
             'scope' => Discount::SCOPE_GLOBAL,
             'type' => Discount::TYPE_PERCENT,
             'value' => 20,
             'maximum_uses' => 5
-        ]);
+            ]
+        );
         $this->discountRepository->store($discount);
 
         // When we call the controller
-        $this->get('add_discount', [
+        $this->get(
+            'add_discount', [
             'uuid' => $discount->uuid
-        ]);
+            ]
+        );
 
         // Then the response should be a redirection
         $this->assertResponseStatusCodeSame(302);
@@ -94,7 +102,11 @@ class AddDiscountControllerTest extends WebTestCase
         $this->assertCount(1, $this->flashBag->get('success'));
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_add_several_discounts_to_basket()
     {
         // Given there is are courses in the basket
@@ -104,34 +116,42 @@ class AddDiscountControllerTest extends WebTestCase
         }
 
         // And a Discounts exists 
-        $discount1 = DiscountFactory::create([
+        $discount1 = DiscountFactory::create(
+            [
             'scope' => Discount::SCOPE_GLOBAL,
             'type' => Discount::TYPE_PERCENT,
             'value' => 20,
             'maximum_uses' => 5
-        ]);
+            ]
+        );
         $this->discountRepository->store($discount1);
 
         // When we call the controller
-        $this->get('add_discount', [
+        $this->get(
+            'add_discount', [
             'uuid' => $discount1->uuid
-        ]);
+            ]
+        );
 
         // $this->basketManager->getTotalAmountWithoutDiscounts();
 
-        $discount2 = DiscountFactory::create([
+        $discount2 = DiscountFactory::create(
+            [
             'scope' => Discount::SCOPE_SPECIFIC,
             'type' => Discount::TYPE_PERCENT,
             'value' => 20,
             'items' => [$courses[array_rand($courses)]],
             'maximum_uses' => 10
-        ]);
+            ]
+        );
         $this->discountRepository->store($discount2);
 
         // When we call the controller
-        $this->get('add_discount', [
+        $this->get(
+            'add_discount', [
             'uuid' => $discount2->uuid
-        ]);
+            ]
+        );
 
         // Then the response should be a redirection
         $this->assertResponseStatusCodeSame(302);

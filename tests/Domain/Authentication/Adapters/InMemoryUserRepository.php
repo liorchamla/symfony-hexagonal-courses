@@ -7,7 +7,11 @@ use Domain\Authentication\Gateway\UserRepositoryInterface;
 
 class InMemoryUserRepository implements UserRepositoryInterface
 {
-    /** @var User[] */
+    /**
+     * 
+     *
+     * @var User[] 
+     */
     public array $users = [];
 
     public function findOneOrNull(string $uuid): ?User

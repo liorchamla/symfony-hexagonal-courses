@@ -31,7 +31,11 @@ class AddSalableToBasketTest extends TestCase
         $this->courseRepository = new InMemoryCourseRepository;
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_add_a_sabable_to_the_basket()
     {
         // Given we have a course
@@ -39,10 +43,14 @@ class AddSalableToBasketTest extends TestCase
 
         // When we call the use case
         $useCase = new AddSalableToBasket($this->basketManager, $this->courseRepository);
-        $view = $useCase->execute(new AddSalableToBasketRequest([
-            'salable_class' => Course::class,
-            'salable_uuid' => $course->uuid
-        ]));
+        $view = $useCase->execute(
+            new AddSalableToBasketRequest(
+                [
+                'salable_class' => Course::class,
+                'salable_uuid' => $course->uuid
+                ]
+            )
+        );
 
         // Then the course is added to the basket
         $this->assertEquals($view->salable, $course);
@@ -52,7 +60,11 @@ class AddSalableToBasketTest extends TestCase
         $this->assertEquals(400, $this->basketManager->getTotalAmountWithoutDiscounts());
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function adding_an_unexisting_salable_to_basket_will_throw()
     {
         // Given we have no course
@@ -61,9 +73,13 @@ class AddSalableToBasketTest extends TestCase
         // Then it will throw
         $this->expectException(SalableCouldNotBeAddedToBasketException::class);
         $useCase = new AddSalableToBasket($this->basketManager, $this->courseRepository);
-        $view = $useCase->execute(new AddSalableToBasketRequest([
-            'salable_class' => Course::class,
-            'salable_uuid' => 'unexistant-course-uuid'
-        ]));
+        $view = $useCase->execute(
+            new AddSalableToBasketRequest(
+                [
+                'salable_class' => Course::class,
+                'salable_uuid' => 'unexistant-course-uuid'
+                ]
+            )
+        );
     }
 }

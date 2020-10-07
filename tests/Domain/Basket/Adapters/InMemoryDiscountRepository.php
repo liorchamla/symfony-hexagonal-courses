@@ -8,7 +8,11 @@ use Domain\Basket\Gateway\DiscountRepositoryInterface;
 
 class InMemoryDiscountRepository implements DiscountRepositoryInterface
 {
-    /** @var Discount[] */
+    /**
+     * 
+     *
+     * @var Discount[] 
+     */
     public array $discounts = [];
 
     public function store(Discount $discount)

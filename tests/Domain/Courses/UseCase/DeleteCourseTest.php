@@ -11,7 +11,11 @@ use PHPUnit\Framework\TestCase;
 
 class DeleteCourseTest extends TestCase
 {
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_delete_a_course_if_it_exists()
     {
         $courseRepository = new InMemoryCourseRepository;
@@ -22,15 +26,23 @@ class DeleteCourseTest extends TestCase
 
         // When we want to delete it
         $useCase = new DeleteCourse($courseRepository);
-        $useCase->execute(new DeleteCourseRequest([
-            'uuid' => $course->uuid
-        ]));
+        $useCase->execute(
+            new DeleteCourseRequest(
+                [
+                'uuid' => $course->uuid
+                ]
+            )
+        );
 
         // Then it should not be in the database anymore
         $this->assertNull($courseRepository->findOneOrNull($course->uuid));
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_cant_delete_a_course_if_it_does_not_exist()
     {
         $courseRepository = new InMemoryCourseRepository;
@@ -40,8 +52,12 @@ class DeleteCourseTest extends TestCase
         // Then it should throw
         $this->expectException(CourseNotFoundException::class);
         $useCase = new DeleteCourse($courseRepository);
-        $useCase->execute(new DeleteCourseRequest([
-            'uuid' => 'unexisting-uuid'
-        ]));
+        $useCase->execute(
+            new DeleteCourseRequest(
+                [
+                'uuid' => 'unexisting-uuid'
+                ]
+            )
+        );
     }
 }

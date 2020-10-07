@@ -32,7 +32,11 @@ class RemoveFromBasketControllerTest extends WebTestCase
         $this->basketManager = self::$container->get(BasketManager::class);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_remove_a_course_from_basket()
     {
         // Given there is a course
@@ -42,9 +46,11 @@ class RemoveFromBasketControllerTest extends WebTestCase
         $this->basketManager->addItem($course);
 
         // When we call the controller
-        $this->get('remove_from_basket', [
+        $this->get(
+            'remove_from_basket', [
             'uuid' => $course->uuid
-        ]);
+            ]
+        );
 
         $messages = $this->flashBag->get('success');
 
@@ -56,14 +62,20 @@ class RemoveFromBasketControllerTest extends WebTestCase
         $this->assertCount(1, $messages);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_cant_remove_a_course_from_basket_if_it_is_not_inside()
     {
         // Given there is no course in the basket
         // When we call the controller
-        $this->get('remove_from_basket', [
+        $this->get(
+            'remove_from_basket', [
             'uuid' => 'unexisting-uuid'
-        ]);
+            ]
+        );
 
         $messages = $this->flashBag->get('danger');
         $successMessages = $this->flashBag->get('success');

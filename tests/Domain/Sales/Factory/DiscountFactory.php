@@ -12,22 +12,30 @@ class DiscountFactory
     {
         $faker = Factory::create();
 
-        $scope =  $faker->randomElement([
+        $scope =  $faker->randomElement(
+            [
             Discount::SCOPE_GLOBAL, Discount::SCOPE_SPECIFIC
-        ]);
+            ]
+        );
 
-        $data = array_merge([
+        $data = array_merge(
+            [
             'scope' => $scope,
-            'type' => $faker->randomElement([
+            'type' => $faker->randomElement(
+                [
                 Discount::TYPE_FIXED, Discount::TYPE_PERCENT
-            ]),
+                ]
+            ),
             'value' => $faker->numberBetween(30, 50),
-            'maximum_uses' => $faker->randomElement([
+            'maximum_uses' => $faker->randomElement(
+                [
                 5,
                 Discount::MAXIMUM_USES_INFINITY
-            ]),
+                ]
+            ),
             'items' => []
-        ], $data);
+            ], $data
+        );
 
         if ($data['scope'] === Discount::SCOPE_SPECIFIC && count($data['items']) === 0) {
 

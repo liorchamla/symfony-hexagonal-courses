@@ -16,7 +16,11 @@ use PHPUnit\Framework\TestCase;
 
 class ShowChapterTest extends TestCase
 {
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function everyone_can_see_a_chapter_but_cant_play()
     {
         // Given there is a specific chapter
@@ -27,9 +31,13 @@ class ShowChapterTest extends TestCase
 
         // When we call the use case
         $useCase = new ShowChapter($chapterRepository, new InMemoryUserRepository);
-        $view = $useCase->execute(new ShowChapterRequest([
-            'uuid' => $chapter->uuid
-        ]));
+        $view = $useCase->execute(
+            new ShowChapterRequest(
+                [
+                'uuid' => $chapter->uuid
+                ]
+            )
+        );
 
         // Then we should find chapter's infos in the viewmodel
         $this->assertInstanceOf(ShowChapterViewModel::class, $view);
@@ -38,7 +46,11 @@ class ShowChapterTest extends TestCase
         $this->assertNotNull($view->chapter->course);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function an_unexisting_chapter_cant_be_shown()
     {
         // Given we want to show an unexisting chapter
@@ -49,12 +61,20 @@ class ShowChapterTest extends TestCase
         $this->expectException(ChapterNotFoundException::class);
 
         $useCase = new ShowChapter($chapterRepository, new InMemoryUserRepository);
-        $view = $useCase->execute(new ShowChapterRequest([
-            'uuid' => 'inexistant-chapter-uuid'
-        ]));
+        $view = $useCase->execute(
+            new ShowChapterRequest(
+                [
+                'uuid' => 'inexistant-chapter-uuid'
+                ]
+            )
+        );
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function customers_who_paid_the_chapter_course_can_play()
     {
         // Given there is a specific course 
@@ -64,9 +84,11 @@ class ShowChapterTest extends TestCase
         $courseRepository->store($course);
 
         // And the user bought this course
-        $user = UserFactory::create([
+        $user = UserFactory::create(
+            [
             'courses' => [$course]
-        ]);
+            ]
+        );
         $userRepository = new InMemoryUserRepository;
         $userRepository->store($user);
 
@@ -79,10 +101,14 @@ class ShowChapterTest extends TestCase
 
         // When we call the use case
         $useCase = new ShowChapter($chapterRepository, $userRepository);
-        $view = $useCase->execute(new ShowChapterRequest([
-            'uuid' => $chapter->uuid,
-            'userUuid' => $user->uuid
-        ]));
+        $view = $useCase->execute(
+            new ShowChapterRequest(
+                [
+                'uuid' => $chapter->uuid,
+                'userUuid' => $user->uuid
+                ]
+            )
+        );
 
         // Then we should find chapter's infos in the viewmodel
         $this->assertInstanceOf(ShowChapterViewModel::class, $view);

@@ -7,7 +7,11 @@ use Domain\Courses\Gateway\CourseRepositoryInterface;
 
 class InMemoryCourseRepository implements CourseRepositoryInterface
 {
-    /** @var Course[] */
+    /**
+     * 
+     *
+     * @var Course[] 
+     */
     public array $courses = [];
 
     public function store(Course $course): void
@@ -23,5 +27,10 @@ class InMemoryCourseRepository implements CourseRepositoryInterface
     public function delete(Course $course): void
     {
         unset($this->courses[$course->uuid]);
+    }
+
+    public function update(Course $course): void
+    {
+        $this->courses[$course->uuid] = $course;
     }
 }

@@ -11,10 +11,12 @@ class ChapterFactory
     {
         $faker = Factory::create();
 
-        $data = array_merge([
+        $data = array_merge(
+            [
             'course' => CourseFactory::create(),
             'title' => $faker->catchPhrase
-        ], $data);
+            ], $data
+        );
 
         return new Chapter($data['course'], $data['title']);
     }

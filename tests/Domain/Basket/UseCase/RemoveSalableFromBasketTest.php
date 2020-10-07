@@ -34,7 +34,11 @@ class RemoveSalableFromBasketTest extends TestCase
         $this->courseRepository = new InMemoryCourseRepository;
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_remove_a_salable_from_basket()
     {
         // Given we have a course
@@ -45,9 +49,13 @@ class RemoveSalableFromBasketTest extends TestCase
 
         // When we call the use case
         $useCase = new RemoveSalableFromBasket($this->basketManager, $this->courseRepository);
-        $view = $useCase->execute(new RemoveSalableFromBasketRequest([
-            'salable_uuid' => $course->uuid
-        ]));
+        $view = $useCase->execute(
+            new RemoveSalableFromBasketRequest(
+                [
+                'salable_uuid' => $course->uuid
+                ]
+            )
+        );
 
         // Then the course is added to the basket
         $this->assertEquals($view->salable, $course);
@@ -57,7 +65,11 @@ class RemoveSalableFromBasketTest extends TestCase
         $this->assertEquals(0, $this->basketManager->getTotalAmountWithoutDiscounts());
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function adding_an_unexisting_salable_to_basket_will_throw()
     {
         // Given we have no course
@@ -66,8 +78,12 @@ class RemoveSalableFromBasketTest extends TestCase
         // Then it will throw
         $this->expectException(SalableNotFoundInBasketException::class);
         $useCase = new RemoveSalableFromBasket($this->basketManager);
-        $view = $useCase->execute(new RemoveSalableFromBasketRequest([
-            'salable_uuid' => 'unexistant-course-uuid'
-        ]));
+        $view = $useCase->execute(
+            new RemoveSalableFromBasketRequest(
+                [
+                'salable_uuid' => 'unexistant-course-uuid'
+                ]
+            )
+        );
     }
 }

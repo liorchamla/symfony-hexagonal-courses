@@ -8,7 +8,11 @@ use Domain\Courses\Gateway\ChapterRepositoryInterface;
 
 class InMemoryChapterRepository implements ChapterRepositoryInterface
 {
-    /** @var Chapter[] */
+    /**
+     * 
+     *
+     * @var Chapter[] 
+     */
     public array $chapters = [];
 
     public function store(Chapter $chapter): void

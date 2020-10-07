@@ -13,10 +13,12 @@ class SaleFactory
     {
         $faker = Factory::create();
 
-        $data = array_merge([
+        $data = array_merge(
+            [
             'items' => [],
             'owner' => UserFactory::create()
-        ], $data);
+            ], $data
+        );
 
         $sale = new Sale($data['owner'], $data['items']);
 
@@ -29,10 +31,12 @@ class SaleFactory
         $sales = [];
 
         for ($i = 0; $i < $count; $i++) {
-            $data = array_merge([
+            $data = array_merge(
+                [
                 'items' => [],
                 'owner' => UserFactory::create()
-            ], $data);
+                ], $data
+            );
 
             $sales[] = new Sale($data['owner'], $data['items']);
         }

@@ -9,7 +9,11 @@ use Domain\Sales\Entity\Salable;
 class InMemoryBasketStorage implements BasketStorageInterface
 {
 
-    /** @var Salable[] */
+    /**
+     * 
+     *
+     * @var Salable[] 
+     */
     public array $items = [];
     public ?User $owner;
 

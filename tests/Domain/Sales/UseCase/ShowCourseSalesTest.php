@@ -15,7 +15,11 @@ use PHPUnit\Framework\TestCase;
 class ShowCourseSalesTest extends TestCase
 {
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_cant_see_courses_sales_for_an_unexisting_course()
     {
         // Setup
@@ -27,12 +31,20 @@ class ShowCourseSalesTest extends TestCase
         // Then it should throw
         $this->expectException(CourseNotFoundException::class);
         $useCase = new ShowCourseSales($saleRepository, $courseRepository);
-        $view = $useCase->execute(new ShowCourseSalesRequest([
-            'uuid' => 'unexisting-course-uuid'
-        ]));
+        $view = $useCase->execute(
+            new ShowCourseSalesRequest(
+                [
+                'uuid' => 'unexisting-course-uuid'
+                ]
+            )
+        );
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_see_courses_sales_for_an_existing_course()
     {
         // Setup
@@ -44,9 +56,11 @@ class ShowCourseSalesTest extends TestCase
         $courseRepository->store($course);
 
         // And it was sold several times
-        $sales = SaleFactory::createMany(20, [
+        $sales = SaleFactory::createMany(
+            20, [
             'items' => [$course]
-        ]);
+            ]
+        );
 
         foreach ($sales as $s) {
             $saleRepository->store($s);
@@ -54,9 +68,13 @@ class ShowCourseSalesTest extends TestCase
 
         // When we execute the useCase
         $useCase = new ShowCourseSales($saleRepository, $courseRepository);
-        $view = $useCase->execute(new ShowCourseSalesRequest([
-            'uuid' => $course->uuid
-        ]));
+        $view = $useCase->execute(
+            new ShowCourseSalesRequest(
+                [
+                'uuid' => $course->uuid
+                ]
+            )
+        );
 
         // Then we should see sales
         $this->assertEquals($course, $view->course);

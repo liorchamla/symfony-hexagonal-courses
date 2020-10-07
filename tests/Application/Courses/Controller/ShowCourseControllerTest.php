@@ -20,13 +20,25 @@ class ShowCourseControllerTest extends WebTestCase
         $this->setUpClient();
 
         // Setup
-        /** @var CourseRepositoryInterface */
+        /**
+* 
+         *
+ * @var CourseRepositoryInterface 
+*/
         $this->courseRepository = self::$container->get(CourseRepositoryInterface::class);
-        /** @var ChapterRepositoryInterface */
+        /**
+* 
+         *
+ * @var ChapterRepositoryInterface 
+*/
         $this->chapterRepository = self::$container->get(ChapterRepositoryInterface::class);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function it_should_show_a_course_and_its_chapters()
     {
         // Given there is a course
@@ -45,7 +57,11 @@ class ShowCourseControllerTest extends WebTestCase
         $this->assertEquals(2, $this->client->getCrawler()->filter('li')->count());
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function it_should_display_a_404_if_course_is_not_found()
     {
         // When we call the controller

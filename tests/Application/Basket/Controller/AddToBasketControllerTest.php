@@ -32,16 +32,22 @@ class AddToBasketControllerTest extends WebTestCase
         $this->basketManager = new BasketManager($this->basketStorage, new DiscountComputation, $this->discountStorage);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_add_a_course_to_basket()
     {
         // Given there is a course
         $course = $this->createCourse(['price' => 400]);
 
         // When we call the controller
-        $this->get('add_to_basket', [
+        $this->get(
+            'add_to_basket', [
             'uuid' => $course->uuid
-        ]);
+            ]
+        );
 
         // Then the response should be a redirection
         $this->assertResponseStatusCodeSame(302);
@@ -52,15 +58,21 @@ class AddToBasketControllerTest extends WebTestCase
         $this->assertCount(1, $this->flashBag->get('success'));
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_cant_add_a_course_to_basket_if_it_does_not_exist()
     {
         // Given there is no course in basket
 
         // When we call the controller
-        $this->get('add_to_basket', [
+        $this->get(
+            'add_to_basket', [
             'uuid' => 'unexisting-uuid'
-        ]);
+            ]
+        );
 
         // Then the response should be a redirection
         $this->assertResponseStatusCodeSame(302);
