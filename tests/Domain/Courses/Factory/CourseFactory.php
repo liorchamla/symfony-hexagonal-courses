@@ -19,10 +19,12 @@ class CourseFactory
     {
         $faker = self::getFaker();
 
-        $data = array_merge([
+        $data = array_merge(
+            [
             'title' => $faker->catchPhrase,
             'price' => $faker->numberBetween(100, 5000)
-        ], $data);
+            ], $data
+        );
 
         $course = new Course($data['title'], $data['price']);
 
@@ -43,10 +45,12 @@ class CourseFactory
         $courses = [];
 
         for ($i = 0; $i < $count; $i++) {
-            $data = array_merge([
+            $data = array_merge(
+                [
                 'title' => $faker->catchPhrase,
                 'price' => $faker->numberBetween(100, 5000)
-            ], $data);
+                ], $data
+            );
 
             $courses[] =  new Course($data['title'], $data['price']);
         }

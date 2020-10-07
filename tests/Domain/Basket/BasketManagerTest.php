@@ -16,7 +16,11 @@ use App\Tests\Domain\Courses\Adapters\InMemoryCourseRepository;
 
 class BasketManagerTest extends TestCase
 {
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function user_can_add_course_to_basket()
     {
         // And we have 2 specific course
@@ -79,16 +83,20 @@ class BasketManagerTest extends TestCase
         yield [
             [CourseFactory::create(['price' => 500]), CourseFactory::create(['price' => 300])],
             [
-                DiscountFactory::create([
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_GLOBAL,
                     'type' => Discount::TYPE_FIXED,
                     'value' => 100
-                ]),
-                DiscountFactory::create([
+                    ]
+                ),
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_GLOBAL,
                     'type' => Discount::TYPE_FIXED,
                     'value' => 300
-                ])
+                    ]
+                )
             ],
             100
         ];
@@ -96,16 +104,20 @@ class BasketManagerTest extends TestCase
         yield [
             [CourseFactory::create(['price' => 500]), CourseFactory::create(['price' => 300])],
             [
-                DiscountFactory::create([
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_GLOBAL,
                     'type' => Discount::TYPE_FIXED,
                     'value' => 100
-                ]),
-                DiscountFactory::create([
+                    ]
+                ),
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_GLOBAL,
                     'type' => Discount::TYPE_PERCENT,
                     'value' => 10
-                ])
+                    ]
+                )
             ],
             540
         ];
@@ -113,16 +125,20 @@ class BasketManagerTest extends TestCase
         yield [
             [CourseFactory::create(['price' => 500]), CourseFactory::create(['price' => 300])],
             [
-                DiscountFactory::create([
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_GLOBAL,
                     'type' => Discount::TYPE_PERCENT,
                     'value' => 10
-                ]),
-                DiscountFactory::create([
+                    ]
+                ),
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_GLOBAL,
                     'type' => Discount::TYPE_FIXED,
                     'value' => 100
-                ]),
+                    ]
+                ),
             ],
             540
         ];
@@ -133,7 +149,8 @@ class BasketManagerTest extends TestCase
         yield [
             [$course1, $course2],
             [
-                DiscountFactory::create([
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_SPECIFIC,
                     'type' => Discount::TYPE_PERCENT,
                     'value' => 10,
@@ -141,15 +158,18 @@ class BasketManagerTest extends TestCase
                         $course1,
                         $course2
                     ]
-                ]),
-                DiscountFactory::create([
+                    ]
+                ),
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_SPECIFIC,
                     'type' => Discount::TYPE_FIXED,
                     'value' => 100,
                     'items' => [
                         $course1
                     ]
-                ]),
+                    ]
+                ),
             ],
             630
         ];

@@ -20,7 +20,11 @@ class SessionDiscountStorageTest extends WebTestCase
         $this->storage = new SessionDiscountStorage($this->session);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function session_is_affected_by_discount_storage()
     {
         // Given we have a discount
@@ -34,7 +38,11 @@ class SessionDiscountStorageTest extends WebTestCase
         $this->assertCount(1, $discounts);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_retrieve_discounts_from_the_session_with_storage()
     {
         // Given we have several discounts in session

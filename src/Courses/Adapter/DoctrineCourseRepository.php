@@ -49,4 +49,9 @@ class DoctrineCourseRepository implements ServiceEntityRepositoryInterface, Cour
     {
         ///
     }
+
+    public function update(Course $course): void
+    {
+        ///
+    }
 }

@@ -11,11 +11,11 @@ class Course implements Salable
     public ?string $title = '';
     public ?int $price = 0;
 
-    public function __construct(string $title, int $price)
+    public function __construct(string $title, int $price, ?string $uuid = null)
     {
         $this->title = $title;
         $this->price = $price;
-        $this->uuid = Uuid::uuid1();
+        $this->uuid = $uuid ?? Uuid::uuid1();
     }
 
     public function getUuid(): string

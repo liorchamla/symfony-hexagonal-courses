@@ -21,7 +21,11 @@ use App\Tests\Domain\Basket\Adapters\InMemoryDiscountStorage;
 class AddDiscountTest extends TestCase
 {
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function applying_an_unexisting_discount_will_throw()
     {
         // Given we call the use case with an unexisting discount
@@ -29,9 +33,13 @@ class AddDiscountTest extends TestCase
         // Then it should throw
         $this->expectException(DiscountNotFoundException::class);
         $useCase = new AddDiscount(new InMemoryDiscountRepository, new BasketManager(new InMemoryBasketStorage, new DiscountComputation, new InMemoryDiscountStorage));
-        $view = $useCase->execute(new AddDiscountRequest([
-            'uuid' => 'unexisting-discount-uuid'
-        ]));
+        $view = $useCase->execute(
+            new AddDiscountRequest(
+                [
+                'uuid' => 'unexisting-discount-uuid'
+                ]
+            )
+        );
     }
 
     /** 
@@ -67,9 +75,13 @@ class AddDiscountTest extends TestCase
             $beforeMaximumUses = $d->maximumUses;
 
             $useCase = new AddDiscount($discountRepository, $basketManager);
-            $view = $useCase->execute(new AddDiscountRequest([
-                'uuid' => $d->uuid
-            ]));
+            $view = $useCase->execute(
+                new AddDiscountRequest(
+                    [
+                    'uuid' => $d->uuid
+                    ]
+                )
+            );
 
             $this->assertEquals($beforeMaximumUses - 1, $d->maximumUses);
         }
@@ -91,16 +103,20 @@ class AddDiscountTest extends TestCase
         yield [
             CourseFactory::createMany(3, ['price' => 300]),
             [
-                DiscountFactory::create([
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_GLOBAL,
                     'type' => Discount::TYPE_FIXED,
                     'value' => 100
-                ]),
-                DiscountFactory::create([
+                    ]
+                ),
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_GLOBAL,
                     'type' => Discount::TYPE_FIXED,
                     'value' => 50
-                ]),
+                    ]
+                ),
             ],
             450
         ];
@@ -108,11 +124,13 @@ class AddDiscountTest extends TestCase
         yield [
             CourseFactory::createMany(3, ['price' => 300]),
             [
-                DiscountFactory::create([
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_GLOBAL,
                     'type' => Discount::TYPE_FIXED,
                     'value' => 100
-                ]),
+                    ]
+                ),
             ],
             600
         ];
@@ -120,11 +138,13 @@ class AddDiscountTest extends TestCase
         yield [
             CourseFactory::createMany(3, ['price' => 300]),
             [
-                DiscountFactory::create([
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_GLOBAL,
                     'type' => Discount::TYPE_PERCENT,
                     'value' => 20
-                ]),
+                    ]
+                ),
             ],
             720
         ];
@@ -135,12 +155,14 @@ class AddDiscountTest extends TestCase
         yield [
             [$course1, $course2],
             [
-                DiscountFactory::create([
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_SPECIFIC,
                     'type' => Discount::TYPE_PERCENT,
                     'value' => 20,
                     'items' => [$course1]
-                ]),
+                    ]
+                ),
             ],
             1200 - 120
         ];
@@ -148,18 +170,22 @@ class AddDiscountTest extends TestCase
         yield [
             [$course1, $course2],
             [
-                DiscountFactory::create([
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_SPECIFIC,
                     'type' => Discount::TYPE_PERCENT,
                     'value' => 20,
                     'items' => [$course1]
-                ]),
-                DiscountFactory::create([
+                    ]
+                ),
+                DiscountFactory::create(
+                    [
                     'scope' => Discount::SCOPE_SPECIFIC,
                     'type' => Discount::TYPE_FIXED,
                     'value' => 50,
                     'items' => [$course1, $course2]
-                ]),
+                    ]
+                ),
             ],
             1200 - 50 - 50 - 110
         ];

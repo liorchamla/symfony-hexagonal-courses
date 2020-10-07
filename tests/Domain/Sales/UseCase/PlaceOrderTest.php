@@ -22,7 +22,11 @@ use Domain\Sales\Exception\OrderCouldNotBePlacedWithNoAuthenticatedUserException
 class PlaceOrderTest extends TestCase
 {
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function an_unauthenticated_user_can_not_place_an_order()
     {
         // Given we have 2 specific course
@@ -46,12 +50,20 @@ class PlaceOrderTest extends TestCase
 
         $saleRepository = new InMemorySaleRepository;
         $useCase = new PlaceOrder($basketManager, $saleRepository);
-        $view = $useCase->execute(new PlaceOrderRequest([
-            'isAuthenticated' => false
-        ]));
+        $view = $useCase->execute(
+            new PlaceOrderRequest(
+                [
+                'isAuthenticated' => false
+                ]
+            )
+        );
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function a_user_can_place_an_order()
     {
         // Given we have a user
@@ -79,9 +91,13 @@ class PlaceOrderTest extends TestCase
         // When he places an order
         $saleRepository = new InMemorySaleRepository;
         $useCase = new PlaceOrder($basketManager, $saleRepository);
-        $view = $useCase->execute(new PlaceOrderRequest([
-            'isAuthenticated' => true
-        ]));
+        $view = $useCase->execute(
+            new PlaceOrderRequest(
+                [
+                'isAuthenticated' => true
+                ]
+            )
+        );
 
         $this->assertInstanceOf(Sale::class, $view->sale);
         $this->assertEquals($course1->getPrice() + $course2->getPrice(), $view->sale->getTotalAmount());
@@ -90,7 +106,11 @@ class PlaceOrderTest extends TestCase
         $this->assertNotNull($saleRepository->findOneOrNull($view->sale->uuid));
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function a_user_can_not_place_order_if_basket_is_empty()
     {
 
@@ -112,8 +132,12 @@ class PlaceOrderTest extends TestCase
 
         $saleRepository = new InMemorySaleRepository;
         $useCase = new PlaceOrder($basketManager, $saleRepository);
-        $view = $useCase->execute(new PlaceOrderRequest([
-            'isAuthenticated' => true
-        ]));
+        $view = $useCase->execute(
+            new PlaceOrderRequest(
+                [
+                'isAuthenticated' => true
+                ]
+            )
+        );
     }
 }

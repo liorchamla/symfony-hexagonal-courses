@@ -12,7 +12,11 @@ use PHPUnit\Framework\TestCase;
 
 class ShowUserSalesTest extends TestCase
 {
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_see_users_sales()
     {
         // Setup
@@ -31,9 +35,13 @@ class ShowUserSalesTest extends TestCase
 
         // When we execute the use case
         $useCase = new ShowUserSales($saleRepository, $userRepository);
-        $view = $useCase->execute(new ShowUserSalesRequest([
-            'uuid' => $user->uuid
-        ]));
+        $view = $useCase->execute(
+            new ShowUserSalesRequest(
+                [
+                'uuid' => $user->uuid
+                ]
+            )
+        );
 
         $this->assertCount(10, $view->sales);
     }

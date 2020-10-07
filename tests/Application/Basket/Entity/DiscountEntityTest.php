@@ -12,7 +12,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class DiscountEntityTest extends TestCase
 {
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_have_a_discount_entity()
     {
         $entity = new DiscountEntity;
@@ -24,18 +28,24 @@ class DiscountEntityTest extends TestCase
         $this->assertEquals(Discount::MAXIMUM_USES_INFINITY, $entity->maximumUses);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_transform_doctrine_entity_into_domain_entity()
     {
         $entity = new DiscountEntity;
 
         $entity->scope = Discount::SCOPE_SPECIFIC;
         $entity->type = Discount::TYPE_FIXED;
-        $entity->items = new ArrayCollection([
+        $entity->items = new ArrayCollection(
+            [
             CourseEntity::fromDomain(
                 CourseFactory::create()
             )
-        ]);
+            ]
+        );
         $entity->uuid =  'fake-uuid';
 
         $discount = DiscountEntity::toDomain($entity);
@@ -43,7 +53,11 @@ class DiscountEntityTest extends TestCase
         $this->assertInstanceOf(Discount::class, $discount);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_transform_a_domain_discount_into_a_doctrine_entity()
     {
         $discount = DiscountFactory::create();

@@ -25,10 +25,18 @@ class SessionBasketStorageTest extends WebTestCase
         $this->courseRepository = self::$container->get(CourseRepositoryInterface::class);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function storage_impact_session_on_add()
     {
-        /** @var SessionInterface */
+        /**
+* 
+         *
+ * @var SessionInterface 
+*/
         $session = self::$container->get(SessionInterface::class);
 
         // Given we have a course
@@ -43,19 +51,29 @@ class SessionBasketStorageTest extends WebTestCase
         $this->assertEquals($course, $session->get('basket.items')[$course->uuid]);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function storage_impact_session_on_delete()
     {
-        /** @var SessionInterface */
+        /**
+* 
+         *
+ * @var SessionInterface 
+*/
         $session = self::$container->get(SessionInterface::class);
 
         // Given we have a course
         $course = $this->createCourse(['price' => 400]);
 
         // And the course is already in the storage
-        $session->set('basket.items', [
+        $session->set(
+            'basket.items', [
             $course->uuid => $course
-        ]);
+            ]
+        );
 
         // When we remove it from the storage
         $storage = new SessionBasketStorage($session);

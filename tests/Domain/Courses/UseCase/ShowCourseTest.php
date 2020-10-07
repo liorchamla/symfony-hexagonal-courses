@@ -12,14 +12,20 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ShowCourseTest extends TestCase
 {
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function everyone_can_see_course_page()
     {
         // Given we have a course
         $title = 'Symfony 5';
-        $course = CourseFactory::create([
+        $course = CourseFactory::create(
+            [
             'title' => $title
-        ]);
+            ]
+        );
 
         // And it is inside the store
         $courseRepository = new InMemoryCourseRepository();
@@ -27,16 +33,24 @@ class ShowCourseTest extends TestCase
 
         // When I execute the ShowCourse UseCase
         $useCase = new ShowCourse($courseRepository, new InMemoryChapterRepository);
-        $view = $useCase->execute(new ShowCourseRequest([
-            'uuid' => $course->uuid,
-            'isAuthenticated' => false
-        ]));
+        $view = $useCase->execute(
+            new ShowCourseRequest(
+                [
+                'uuid' => $course->uuid,
+                'isAuthenticated' => false
+                ]
+            )
+        );
 
         // Then the view should contain Course's informations
         $this->assertEquals($title, $view->course->title);
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_cant_see_an_unexisting_course()
     {
         // And it is inside the store
@@ -47,19 +61,29 @@ class ShowCourseTest extends TestCase
 
         $this->expectException(CourseNotFoundException::class);
 
-        $view = $useCase->execute(new ShowCourseRequest([
-            'uuid' => 'inexistant'
-        ]));
+        $view = $useCase->execute(
+            new ShowCourseRequest(
+                [
+                'uuid' => 'inexistant'
+                ]
+            )
+        );
     }
 
-    /** @test */
+    /**
+     * 
+     *
+     * @test 
+     */
     public function we_can_find_the_chapters_list_for_a_course()
     {
         // Given we have a course
         $title = 'Symfony 5';
-        $course = CourseFactory::create([
+        $course = CourseFactory::create(
+            [
             'title' => $title
-        ]);
+            ]
+        );
 
         // And it is inside the store
         $courseRepository = new InMemoryCourseRepository();
@@ -76,10 +100,14 @@ class ShowCourseTest extends TestCase
 
         // When I execute the ShowCourse UseCase
         $useCase = new ShowCourse($courseRepository, $chapterRepository);
-        $view = $useCase->execute(new ShowCourseRequest([
-            'uuid' => $course->uuid,
-            'isAuthenticated' => false
-        ]));
+        $view = $useCase->execute(
+            new ShowCourseRequest(
+                [
+                'uuid' => $course->uuid,
+                'isAuthenticated' => false
+                ]
+            )
+        );
 
         // Then the view should contain Course's informations
         $this->assertEquals($title, $view->course->title);

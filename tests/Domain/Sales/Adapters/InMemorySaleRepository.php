@@ -27,9 +27,11 @@ class InMemorySaleRepository implements SaleRepositoryInterface
 
     public function findSalesForCourse(Course $course): iterable
     {
-        return array_filter($this->sales, function (Sale $s) use ($course) {
-            return in_array($course, $s->items) !== false;
-        });
+        return array_filter(
+            $this->sales, function (Sale $s) use ($course) {
+                return in_array($course, $s->items) !== false;
+            }
+        );
     }
 
     public function findSalesForUser(User $user): iterable

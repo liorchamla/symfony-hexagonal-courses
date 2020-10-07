@@ -8,9 +8,11 @@ class UserFactory
 {
     public static function create(array $data = []): User
     {
-        $data = array_merge([
+        $data = array_merge(
+            [
             'courses' => [],
-        ], $data);
+            ], $data
+        );
 
         return new User($data['courses']);
     }
